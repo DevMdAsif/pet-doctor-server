@@ -27,6 +27,7 @@ async function run() {
     await client.connect();
 
     const doctorCollection = client.db("petDoctors").collection("doctorsInfo");
+    const aboutCollection = client.db("petDoctors").collection("AboutUs");
 
     app.get("/", (req, res) => {
       const result = "hello";
@@ -35,6 +36,10 @@ async function run() {
 
     app.get("/doctors", async (req, res) => {
       const result = await doctorCollection.find().toArray();
+      res.send(result);
+    });
+    app.get("/aboutUs", async (req, res) => {
+      const result = await aboutCollection.find().toArray();
       res.send(result);
     });
 
